@@ -32,7 +32,15 @@
         alert("Latitude: " + position.coords.latitude + ", Longitude: " +
             position.coords.longitude);
     }
-        getLocation();
+    setInterval(getLocation,10000);
 
+
+        fetch("https://codecyprus.org/th/api/location?session=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgID8p8-MCww&latitude=position.coords.latitude&longitude=position.coords.longitude")
+</script>
+<script>
+document.cookie = "firstname=John";
+document.cookie = "lastname=Smith";
+var cookies = document.cookie;
+console.log(cookies);
 </script>
 </html>
