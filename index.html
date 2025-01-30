@@ -11,9 +11,29 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JB08YFENRB"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
 
     gtag('config', 'G-JB08YFENRB');
+
+        function getLocation() {
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+        else {
+        alert("Geolocation is not supported by your browser.");
+    }
+    }
+        function showPosition(position) {
+        alert("Latitude: " + position.coords.latitude + ", Longitude: " +
+            position.coords.longitude);
+    }
+        getLocation();
+
+
 </script>
 </html>
