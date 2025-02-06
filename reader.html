@@ -39,16 +39,23 @@
 // Default 1 (i.e. analyze every frame).
         scanPeriod: 1
     };
+
+    let camera_index = 0;
+    let all_cameras;
+
     var scanner = new Instascan.Scanner(opts);
     document.getElementById("start").addEventListener('click',function(){
         Instascan.Camera.getCameras().then(function (cameras) {
+            all_cameras = cameras;
             if (cameras.length > 0) {
-                scanner.start(cameras[0]);
+                scanner.start(cameras[camera_index]);
             }
                 else{
                 console.error('No cameras found.');
                 alert("No cameras found.");
             }
+
+
         }).catch(function (e) {
             console.error(e);
         });
@@ -57,13 +64,17 @@
             document.getElementById("content").innerHTML = content;
             scanner.stop();
         });
-        document.getElementById("change").addEventListener('click',function(){
-            if(scanner.start(cameras[0])){
-            scanner.start(cameras[1]);}
-            else if(scanner.start(cameras[1])){
-                scanner.start(cameras[0]);
-            }
-        })
+
+    });
+
+    document.getElementById("change").addEventListener('click',function(){
+        camera_index++;
+        if (camera_index >= all_cameras.length) {
+            camera_index = 0;
+        }
+        console.log(camera_index);
+        scanner.start(all_cameras[camera_index]);
+
     });
 
 </script>
