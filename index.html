@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>This is the homepage of the website.</h1>
+<a href="reader.html">QR SCANNER</a>
 </body>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JB08YFENRB"></script>
@@ -20,22 +21,19 @@
 
     gtag('config', 'G-JB08YFENRB');
 
-        function getLocation() {
+    function getLocation() {
         if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    }
+            navigator.geolocation.getCurrentPosition(showPosition);}
         else {
-        alert("Geolocation is not supported by your browser.");
-    }
-    }
-        function showPosition(position) {
+            alert("Geolocation is not supported by your browser.");}}
+
+    function showPosition(position) {
         alert("Latitude: " + position.coords.latitude + ", Longitude: " +
-            position.coords.longitude);
-    }
+            position.coords.longitude);}
+
     setInterval(getLocation,10000);
-
-
-        fetch("https://codecyprus.org/th/api/location?session=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgID8p8-MCww&latitude=position.coords.latitude&longitude=position.coords.longitude")
+    let URL=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgID8p8-MCww;
+    fetch("https://codecyprus.org/th/api/location?session=URL&latitude=position.coords.latitude&longitude=position.coords.longitude")
 </script>
 <script>
 document.cookie = "firstname=John";
