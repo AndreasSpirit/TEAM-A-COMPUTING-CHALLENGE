@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start</title>
+</head>
+<body>
+
+<form>
+    <input id="playername" type="text" />
+    <button onclick="startTreasureHunt(); return false">Start</button>
+</form>
+
+<script>
+    function startTreasureHunt() {
+        const params = new URLSearchParams(window.location.search);
+        const treasureHuntID = params.get("treasure-hunt-id");
+        if (!treasureHuntID) {
+            //TODO - Error message
+        } else {
+            //TODO - Read the player name:
+
+            var playerName=document.getElementById("playername").value;
+            const url = "https://codecyprus.org/th/api/start?player=" + playerName + "&app=Team-A-App&treasure-hunt-id=" + treasureHuntID;
+            //TODO - use URL to start treasure hunt (/api/start)
+            fetch(url)
+                .then(response => response.json()) //Parse JSON text to JavaScript object
+                .then(jsonObject => {
+                    console.log(jsonObject);
+                    if(jsonObject.status=="OK"){
+                        //TODO-use Setcookie fucntion from cookies 2
+                        document.cookie="session=jsonObject.session";
+
+                    }
+
+                });
+        }
+    }
+</script>
+
+</body>
+</html>
