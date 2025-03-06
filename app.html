@@ -7,6 +7,53 @@
 <body>
 <p>This is the app html</p>
 <script>
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    let sessions=getCookie("SES");
+
+    fetch("https://codecyprus.org/th/api/question?session="+sessions)
+
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+            console.log(jsonObject);
+            if(jsonObject.questionType=="INTEGER"){
+                document.getElementById("question").innerHTML=jsonObject.questionText;
+            }else if(jsonObject.questionType=="BOOLEAN"){
+                document.getElementById("question").innerHTML=jsonObject.questionText;
+            }else if(jsonObject.questionType=="NUMERIC"){
+                document.getElementById("question").innerHTML=jsonObject.questionText;
+            }
+            else if(jsonObject.questionType=="MCQ"){
+                document.getElementById("question").innerHTML=jsonObject.questionText;
+            }
+            else if(jsonObject.questionType=="TEXT"){
+                document.getElementById("question").innerHTML=jsonObject.questionText;
+            }
+        });
+
+    fetch("https://codecyprus.org/th/api/answer?session="+sessions+"&answer="+42)
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+            console.log(jsonObject);
+        });
+
 </script>
+<div id="question"></div>
+<div id="options">
+
+</div>
 </body>
 </html>
