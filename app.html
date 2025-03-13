@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body onload="getquestion()">
 <p>This is the app html</p>
 <script>
     function getCookie(cname) {
@@ -24,36 +24,83 @@
     }
     let sessions=getCookie("SES");
 
-    fetch("https://codecyprus.org/th/api/question?session="+sessions)
+function getquestion() {
+    fetch("https://codecyprus.org/th/api/question?session=" + sessions)
 
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
             console.log(jsonObject);
-            if(jsonObject.questionType=="INTEGER"){
-                document.getElementById("question").innerHTML=jsonObject.questionText;
-            }else if(jsonObject.questionType=="BOOLEAN"){
-                document.getElementById("question").innerHTML=jsonObject.questionText;
-            }else if(jsonObject.questionType=="NUMERIC"){
-                document.getElementById("question").innerHTML=jsonObject.questionText;
-            }
-            else if(jsonObject.questionType=="MCQ"){
-                document.getElementById("question").innerHTML=jsonObject.questionText;
-            }
-            else if(jsonObject.questionType=="TEXT"){
-                document.getElementById("question").innerHTML=jsonObject.questionText;
-            }
-        });
+            document.getElementById("skip").innerHTML = '<input type="button" value="Skip" onClick="Skip()"/>';
+            if (jsonObject.canBeSkipped== true) {
+                document.getElementById("skip").style.display="block";
 
-    fetch("https://codecyprus.org/th/api/answer?session="+sessions+"&answer="+42)
+            }else{document.getElementById("skip").style.display="none";}
+            if (jsonObject.questionType == "INTEGER") {
+                document.getElementById("question").innerHTML = jsonObject.questionText;
+                document.getElementById("options").innerHTML = '';
+                document.getElementById("options").innerHTML += '<input type="text" id="answer">';
+                document.getElementById("options").innerHTML += '<input type="button" value="Answer" onclick="Answer(answer.value)"/>';
+
+            } else if (jsonObject.questionType == "BOOLEAN") {
+                document.getElementById("question").innerHTML = jsonObject.questionText;
+                document.getElementById("options").innerHTML = '';
+                document.getElementById("options").innerHTML += '<input type="button" id="answer" value="True" onclick="Answer(value)"/>';
+                document.getElementById("options").innerHTML += '<input type="button" id="answer" value="False" onclick="Answer(value)"/>';
+
+
+            } else if (jsonObject.questionType == "NUMERIC") {
+                document.getElementById("question").innerHTML = jsonObject.questionText;
+            } else if (jsonObject.questionType == "MCQ") {
+                document.getElementById("question").innerHTML = jsonObject.questionText;
+                document.getElementById("options").innerHTML = '';
+                document.getElementById("options").innerHTML += '<input type="button" id="answer" value="A" onclick="Answer(value)"/>';
+                document.getElementById("options").innerHTML += '<input type="button" id="answer" value="B" onclick="Answer(value)"/>';
+                document.getElementById("options").innerHTML += '<input type="button" id="answer" value="C" onclick="Answer(value)"/>';
+                document.getElementById("options").innerHTML += '<input type="button" id="answer" value="D" onclick="Answer(value)"/>';
+
+
+            } else if (jsonObject.questionType == "TEXT") {
+                document.getElementById("question").innerHTML = jsonObject.questionText;
+            }
+
+        });
+}
+function Answer(ans) {
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessions + "&answer=" + ans)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
             console.log(jsonObject);
-        });
+            if(ans==""){
+                alert(jsonObject.errorMessages);
+            }
+            else if(jsonObject.correct==false){
+                alert(jsonObject.message);
+            }
+            else if(jsonObject.correct==true){
+                alert(jsonObject.message);
+                getquestion();
+            }
 
+
+
+        })
+}
+    function Skip(){
+        fetch("https://codecyprus.org/th/api/skip?session="+sessions)
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+                console.log(jsonObject);
+               if(jsonObject.status=="OK"){
+
+                getquestion();}
+
+
+            })
+
+    }
 </script>
 <div id="question"></div>
-<div id="options">
-
-</div>
+<div id="options"></div>
+<div id="skip"></div>
 </body>
 </html>
