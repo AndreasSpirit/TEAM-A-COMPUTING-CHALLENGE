@@ -8,8 +8,41 @@
 </head>
 <body>
 
-<header>
-    <h1>Treasure Hunt Web App</h1>
+<header class="header" id="headerid">
+    <div class="header-image">
+        <a href="index.html">
+            <img src="images/pirate.png" alt="logo th" id="logo">
+        </a>
+        <div class="header-title">Treasure Hunt</div>
+        <div class="header-title" id="score" style="display: none;"></div>
+    </div>
+
+    <nav class="header-nav">
+        <ul class="burger-list">
+            <li><a href="index.html">Main page</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="test.html">Test</a></li>
+        </ul>
+    </nav>
+    <div class="burger-menu-button">
+    </div>
+
+<!--Burger menu-->
+<nav class="burger-menu">
+    <ul>
+        <li><a href="index.html">Main page</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="test.html">Test</a></li>
+    </ul>
+</nav>
+    <script>
+        const burger = document.getElementById("burger");
+    const navLinks = document.getElementById("nav-links");
+
+    burger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
+    </script>
 </header>
 
 <main>
@@ -19,8 +52,7 @@
 
         <div class="repository">
             <a href="https://github.com/AndreasSpirit/TEAM-A-COMPUTING-CHALLENGE.git" target="_blank" class="link">
-                <img src="github-logo.png" alt="GitHub Logo" class="logo">
-
+                <img src="images/github.png"  alt="GitHub" class="github-logo" >
             </a>
         </div>
 
@@ -31,7 +63,7 @@
     </div>
     <div class="instagram">
     <a href="https://www.instagram.com/team_a_th" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" width="40px" alt="Instagram">
+        <img src="images/instagram.png"  alt="Instagram">
     </a>
     </div>
 
@@ -41,6 +73,7 @@
            <a href="https://github.com/AndreasSpirit"> <li>AndreasSpirit</li></a>
             <li>vasiliosvulp</li>
             <li>ATsamadou</li>
+            <li>DFoka</li>
         </ul>
     </div>
 </main>
