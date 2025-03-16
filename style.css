@@ -4,31 +4,89 @@
 }
 
 body {
-    background-color: teal;
     color: white;
     text-align: center;
     background-image:url("images/background.png");
     background-size: cover;
     background-attachment: fixed;
 }
+.head {
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
 .header {
     width: auto;
-    height: 150px;
-    background-color: #acb3b8;
+    height: 120px;
+    background-color: #8b4513;
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+}
+.header-image {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
 }
 .header-image img{
-    max-width: 150px;
+    max-width: 120px;
     height: auto;
-    position: absolute;
-    left: 10px;
+}
+.header-title {
+    color: white;
+    font-size: 2.5em;
+    font-weight: bold;
     display: flex;
-    justify-content: space-between
+    align-items: center;
+    justify-content: center;
+    margin-left: 70px;
 }
-.github-logo{
-    width:40px;
+.burger-list{
+    display: flex;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+    justify-content: space-between;
+    gap: 40px;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-decoration: none;
+    list-style-type: none;
 }
-.instagram img{
-    width:40px;
+.burger-list a{
+    text-decoration: none;
+}
+footer{
+    width: auto;
+    background-color: #8b4513;
+    margin-top: 380px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 170px;
+}
+.team{
+    text-align: left;
+}
+.team-list{
+    list-style-type: none;
+}
+.social-media{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.social-media img{
+    width: 40px;
+    height: auto;
+}
+a {
+    color: white;
+}
+a:hover {
+    color: #FFD700;
+}
+.team-list a {
+    color: white;
+    text-decoration: none;
 }
