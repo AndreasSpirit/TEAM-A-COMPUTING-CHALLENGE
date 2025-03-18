@@ -13,6 +13,7 @@ h1{
 a{
     text-decoration: none;
     color:black;
+    font-size: 1.5vw;
 }
 .buttons{
     opacity:75%;
@@ -29,4 +30,13 @@ a{
 }
 .buttons:hover{
     opacity:100%;
+}
+
+.team-list{
+    font-size: 1.3vw;
+}
+
+.intro{
+    font-size: 1.7vw;
+    font-weight: bold;
 }
