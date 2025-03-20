@@ -9,9 +9,6 @@
 <ul id="challenges">
 
 </ul>
-<div id="myDiv">
-
-</div>
 <script>
     var cookies = document.cookie;
     console.log(cookies);
@@ -20,8 +17,8 @@
     .then(jsonObject => {
         console.log(jsonObject);
         for(let i=0; i<jsonObject.treasureHunts.length; i++){
-            let listItem = document.createElement("li");
-            listItem.innerHTML = "<a href='start.html?treasure-hunt-id=" + jsonObject.treasureHunts[i].uuid + "'>"+ jsonObject.treasureHunts[i].name + "</a>";
+            let listItem = document.createElement("button");
+            listItem.innerHTML = "<a href='start.html?treasure-hunt-id=" + jsonObject.treasureHunts[i].uuid + "'  >"+ jsonObject.treasureHunts[i].name + "</a>";
             challenges.appendChild(listItem);
         }//TODO - Success, do something with the data.
     });</script>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="Styles.css"/>
 </head>
 <body onload="getquestion()">
-<p>This is the app html</p>
 <script>
     function getCookie(cname) {
         let name = cname + "=";
@@ -90,6 +90,7 @@ function Answer(ans) {
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
                 console.log(jsonObject);
+                alert("Question skipped.");
                if(jsonObject.status=="OK"){
 
                 getquestion();}
@@ -99,7 +100,7 @@ function Answer(ans) {
 
     }
 </script>
-<div id="question"></div>
+<h1 id="question"></h1>
 <div id="options"></div>
 <div id="skip"></div>
 </body>

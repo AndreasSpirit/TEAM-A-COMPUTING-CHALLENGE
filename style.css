@@ -1,3 +1,4 @@
+/* LANDING PAGE */
 * {
     box-sizing: border-box;
     font-family: "Verdana", sans-serif;
@@ -45,12 +46,12 @@ body {
 }
 .header-title {
     color: white;
-    font-size: 2.5em;
+    font-size: 4vw;
     font-weight: bold;
-    display: flex;
-    align-items: center;
+ margin-left: 40px;
+    text-align: center;
     justify-content: center;
-    margin-left: 70px;
+
 }
 
 .button{
@@ -70,11 +71,12 @@ body {
     display: flex;
     right: 10px;
     top: 10px;
-    position: absolute;
+
     justify-content: space-between;
-    gap: 40px;
+    margin-right: 30px;
+    gap: 30px;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 2vw;
     text-decoration: none;
     list-style-type: none;
 }
