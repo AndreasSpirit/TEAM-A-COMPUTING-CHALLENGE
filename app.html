@@ -31,10 +31,16 @@ function getquestion() {
         .then(jsonObject => {
             console.log(jsonObject);
             document.getElementById("skip").innerHTML = '<input type="button" value="Skip" onClick="Skip()"/>';
+            document.getElementById("location").innerHTML = '<input type="button" value="Get Location" onClick="getLocation()"/>';
             if (jsonObject.canBeSkipped== true) {
                 document.getElementById("skip").style.display="block";
 
             }else{document.getElementById("skip").style.display="none";}
+            if (jsonObject.requiresLocation== true) {
+                document.getElementById("location").style.display="block";
+
+            }else{document.getElementById("location").style.display="none";}
+
             if (jsonObject.questionType == "INTEGER") {
                 document.getElementById("question").innerHTML = jsonObject.questionText;
                 document.getElementById("options").innerHTML = '';
@@ -62,9 +68,28 @@ function getquestion() {
             } else if (jsonObject.questionType == "TEXT") {
                 document.getElementById("question").innerHTML = jsonObject.questionText;
             }
-
+            if(jsonObject.requiresLocation==true) {
+                getLocation();
+            }
         });
 }
+    function getLocation() {
+        fetch("https://codecyprus.org/th/api/location?session="+ sessions +"&latitude=position.coords.latitude&longitude=position.coords.longitude")
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);}
+                else {
+                    alert("Geolocation is not supported by your browser.");}
+
+                function showPosition(position) {
+                    alert("Latitude: " + position.coords.latitude + ",Longitude: " +
+                        position.coords.longitude);
+                }
+
+            })
+
+    }
 function Answer(ans) {
     fetch("https://codecyprus.org/th/api/answer?session=" + sessions + "&answer=" + ans)
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -99,9 +124,74 @@ function Answer(ans) {
             })
 
     }
+    function setCookie(cookieName, cookieValue, expireDays) {
+        let date = new Date();
+        date.setTime(date.getTime() + (expireDays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + date.toUTCString();
+        document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+    }
 </script>
 <h1 id="question"></h1>
 <div id="options"></div>
 <div id="skip"></div>
+<div id="location"></div>
+<script type="text/javascript" src="./instascan.min.js"></script>
+<p>This is the QR code Reader. Only use when requested by the question</p>
+<video id="preview"></video>
+<div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content">
+</div>
+<button id="start">start</button>
+<button id="change">change</button>
+<script>
+    var opts = {
+
+        continuous: true,
+        video: document.getElementById('preview'),
+        mirror: true,
+        captureImage: false,
+        backgroundScan: true,
+// Only applies to continuous mode. The period, in milliseconds, before the same QR
+// code will be recognized in succession. Default 5000 (5 seconds).
+        refractoryPeriod: 5000,
+        scanPeriod: 1
+    };
+
+    let camera_index = 0;
+    let all_cameras;
+
+    var scanner = new Instascan.Scanner(opts);
+    document.getElementById("start").addEventListener('click',function(){
+        Instascan.Camera.getCameras().then(function (cameras) {
+            all_cameras = cameras;
+            if (cameras.length > 0) {
+                scanner.start(cameras[camera_index]);
+            }
+            else{
+                console.error('No cameras found.');
+                alert("No cameras found.");
+            }
+
+
+        }).catch(function (e) {
+            console.error(e);
+        });
+        scanner.addListener('scan', function (content) {
+            console.log(content);
+            document.getElementById("content").innerHTML = content;
+            scanner.stop();
+        });
+
+    });
+
+    document.getElementById("change").addEventListener('click',function(){
+        camera_index++;
+        if (camera_index >= all_cameras.length) {
+            camera_index = 0;
+        }
+        console.log(camera_index);
+        scanner.start(all_cameras[camera_index]);
+
+    });
+</script>
 </body>
 </html>

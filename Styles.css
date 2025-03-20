@@ -16,13 +16,13 @@ h1{
 }
 
 .buttons{
-    opacity:75%;
+    opacity:100%;
     border:1px solid black;
     background-color: #8b4513;
     margin-bottom: 5px;
     padding:5px;
     width:15%;
-    font-size: 1.5vw;
+    font-size: 5vw;
     text-decoration: none;
     color:white;
     text-align: center;
@@ -35,13 +35,11 @@ button{
     opacity:75%;
     border:1px solid black;
     background-color: #8b4513;
-
-
 text-align: center;
-    font-size: 3vw;
+    font-size: 5vw;
     display: block;
     flex-direction: column;
-margin: auto;
+    margin: auto;
     margin-bottom: 30px;
 }
 a{
@@ -82,9 +80,9 @@ input{
     display: block;
     flex-direction: row;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 40px;
     text-align: center;
-    font-size:2vw;
+    font-size:5vw;
     opacity:75%;
     border:1px solid black;
     background-color: #8b4513;
