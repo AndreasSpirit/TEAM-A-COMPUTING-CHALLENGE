@@ -91,3 +91,7 @@ input:hover{
     opacity: 100%;
     color: #FFD700;
 }
+.score{
+    font-size:50px;
+    font-weight: bold;
+}
