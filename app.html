@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="Styles.css"/>
+    <link rel="stylesheet" href="css/Styles.css"/>
 </head>
 <body onload="getquestion()">
 <script>
@@ -23,6 +23,32 @@
         return "";
     }
     let sessions=getCookie("SES");
+
+    //code to for 30min timer
+    let timeInterval;
+    let remainingTime=30*60;
+
+    function updatetime(){
+        const seconds=remainingTime%60;
+        const minutes=Math.floor(remainingTime/60);
+        const timer=document.querySelector('.timer');
+        timer.textContent=`${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+        if (remainingTime <= 0) {
+            clearInterval(timeInterval);
+            timer.textContent = "Time's up!";
+        } else {
+            remainingTime--; // Decrease time every second
+        }
+    }
+
+    function startTimer(){
+        if(timeInterval){
+            clearInterval(timeInterval);
+        }
+        remainingTime=30*60;
+        updatetime();
+        timeInterval=setInterval(updatetime,1000)
+    }
 
 function getquestion() {
     fetch("https://codecyprus.org/th/api/question?session=" + sessions)
@@ -134,6 +160,7 @@ function Answer(ans) {
         let expires = "expires=" + date.toUTCString();
         document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
     }
+
    async function getscore() {
        let sessions = getCookie("SES");
        console.log(sessions);
@@ -157,6 +184,7 @@ function Answer(ans) {
        window.onload = function () {
            getquestion();
            getscore();
+           startTimer();
 
        };
 </script>
@@ -167,6 +195,8 @@ function Answer(ans) {
 <div class="score">
 <span>Score :</span>
 <span id="Displayscore"></span></div>
+<span style="font-size: 50px; font-weight:bold;">Time:</span>
+<span class="timer">30:00</span>
 <script type="text/javascript" src="./instascan.min.js"></script>
 <p>This is the QR code Reader. Only use when requested by the question</p>
 <video id="preview"></video>

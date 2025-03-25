@@ -1,7 +1,7 @@
 /* APPLICATION PAGE/QUESTIONS/LEADERBOARD */
 body{
     background-color: slategray;
-    background-image:url("images/background.png");
+    background-image:url("../images/background.png");
 }
 h1{
     width:94%;
@@ -92,6 +92,10 @@ input:hover{
     color: #FFD700;
 }
 .score{
+    font-size:50px;
+    font-weight: bold;
+}
+.timer{
     font-size:50px;
     font-weight: bold;
 }
