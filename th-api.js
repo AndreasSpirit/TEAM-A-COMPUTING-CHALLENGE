@@ -21,15 +21,6 @@ function handleLeaderboard(leaderboard) {
             "</tr>";
     }
 
-
-    //     let date = new Date(entry['completionTime']);
-    //     let formattedDate = date.toLocaleDateString("en-UK", options);
-    //     html += "<tr>" +
-    //         "<td>" + entry['player'] + "</td>" +
-    //         "<td>" + entry['score'] + "</td>" +
-    //         "<td>" + formattedDate + "</td>" +
-    //         "</tr>";
-    // }
     let leaderboardElement = document.getElementById('test-results-table'); // table
     leaderboardElement.innerHTML += html; // append generated HTML to existing
 }
