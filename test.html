@@ -25,41 +25,58 @@
   </nav>
 </header>
 
-<h1>User Acceptance Test Plan Table</h1>
-<table class="table">
+<h1>Usability Evaluation using Neilsen's Heuristics</h1>
+<table id="test-results-table">
   <tr>
-    <th>Pages</th>
-    <th>Requirements</th>
-    <th>T/F</th>
+    <th>Heuristic</th>
+    <th>Notes</th>
+    <th>Issues to Fix</th>
   </tr>
 <tr>
-  <td>Landing Page(Index)</td>
-  <td><p>Explains the Scope of Project<p><p>List of team members</p><p>Marketing efforts</p></td>
-  <td>T</td>
+  <td>Visibility of System Status</td>
+  <td>Decent Amount, needs some responses</td>
 </tr>
   <tr>
-    <td>JS App and leaderboard</td>
-    <td>
-      <p>UI for multiple screens</p>
-      <p>Uses treasure Hunt API</p>
-      <p>View of available treasure hunts</p>
-      <p>User can start a new session and answer questions</p>
-      <p>Informs for the last question and shows the score</p></td>
-    <td>T</td>
+    <td>Match between system and the real world</td>
+    <td>Interact with the website is easy to understand and use</td>
   </tr>
   <tr>
-  <td>Notes Page for teamwork</td>
-    <td>Notes for progress and team meetings</td>
-    <td>T</td>
+  <td>User control and freedom</td>
+    <td>Users cant go back to treasure hunt list</td>
+    <td>Add a "Back" button</td>
   </tr>
   <tr>
-  <td>Testing Page</td>
-    <td><p>Unit testing</p>
-      <p>User Acceptance Test Plan</p>
-    <p>Usability assessment of the final app</p>
-    </td>
+  <td>Consistency and standards</td>
+    <td>Learnability and Consistency of the website is good</td>
+    <td>Design could be better especially on the Notes page font</td>
+  </tr>
 
-    <td><p>F</p><p>T</p><p>F</p></td>
+  <tr>
+    <td>Error prevention</td>
+    <td>Potential errors have been prevented, including faulty user inputs</td>
+  </tr>
+
+  <tr>
+    <td>Recognition rather than recall</td>
+    <td>Info does not have to be remembered to use the app</td>
+  </tr>
+  <tr>
+    <td>Flexibility and efficiency of use</td>
+    <td>App works in a straighforward and simple way, so flexible usage is limited</td>
+  </tr>
+  <tr>
+    <td>Aesthetic and minimalist design</td>
+    <td>Content and Design is good enough for the necessary paths</td>
+  </tr>
+  <tr>
+    <td>Help users recognize,diagnose and recover from errors</td>
+    <td>Most error messages do not occur once they are triggered</td>
+    <td>Some alerts for error codes would help</td>
+  </tr>
+  <tr>
+    <td>Help and documentation</td>
+    <td>Doesn't need for documentation to understand the app</td>
+    <td>An outside user might not know what the App refers when selecting a hunt to try</td>
   </tr>
 </table>
 
@@ -67,4 +84,22 @@
 
 
 </body>
+<style>
+   #test-results-table{
+    margin:auto;
+    text-align: center;
+    color: #8b4513;
+    background-color:white;
+    font-weight: bold;
+    border:1px solid black;
+  }
+  th{
+    margin:auto;
+    text-align: center;
+    color: white;
+    background-color:#8b4513;
+    font-weight: bold;
+    border:1px solid black;
+  }
+</style>
 </html>

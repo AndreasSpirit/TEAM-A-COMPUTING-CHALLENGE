@@ -50,7 +50,7 @@ function getquestion() {
         .then(jsonObject => {
             console.log(jsonObject);
             document.getElementById("skip").innerHTML = '<input type="button" value="Skip" onClick="Skip()"/>';
-            document.getElementById("location").innerHTML += '<input type="button" value="Get Location" onClick="getLocation()"/>';
+            document.getElementById("location").innerHTML = '<p id="text">Wait 30 seconds before pressing this button again.</p>'+'<input type="button" value="Get Location" onClick="getLocation()"/>';
             if(jsonObject.completed==true){
                 window.location.assign("leaderboard.html");
             }
