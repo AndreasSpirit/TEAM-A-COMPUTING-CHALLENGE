@@ -10,8 +10,6 @@ function handleLeaderboard(leaderboard) {
     console.log("length: " + leaderboardArray.length);
 
     for(const entry of leaderboardArray) {
-    //for (let i = 0; i < leaderboardArray.length; i++) {
-       // const entry = leaderboardArray[i];
         let date = new Date(entry['completionTime']);
         let formattedDate = date.toLocaleDateString("en-UK", options);
         html += "<tr>" +
@@ -22,35 +20,32 @@ function handleLeaderboard(leaderboard) {
     }
 
     let leaderboardElement = document.getElementById('test-results-table'); // table
-    leaderboardElement.innerHTML += html; // append generated HTML to existing
+    leaderboardElement.innerHTML += html;
 }
 function getLeaderBoard(url) {
-// create and invoke the http request
+
     fetch(url, { method: "GET" })
         .then(response => response.json())
         .then(json => handleLeaderboard(json));
 }
-// for now, hardcoded
 let session = "ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICA4OnngggM";
-// let url = TH_TEST_API_URL + "leaderboard?sorted&session=" + session; // form url
-// getLeaderBoard(url);
 
 function getSession() {
     let url = new URL(window.location.href);
     return url.searchParams.get("session");
 }
-// checks if the test flag has been set in the URL
+
 function isTest() {
     let url = new URL(window.location.href);
     return url.searchParams.get("test") != null;
 }
-// check if test and use the actual API or the TEST API accordingly
+
 if(isTest()) {
-// form the test service url
+
     let url = TH_TEST_API_URL + "leaderboard?size=20&sorted";
     getLeaderBoard(url);
 } else {
-// form the actual TH service url
+
     let session = getSession();
     let url = TH_API_URL + "leaderboard?sorted&session=" + session; // form url
     getLeaderBoard(url);

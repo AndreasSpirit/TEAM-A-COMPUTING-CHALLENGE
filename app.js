@@ -13,11 +13,12 @@ function getCookie(cname) {
     }
     return "";
 }
+//code to allow to store the session id of the treasure hunt.
 let sessions=getCookie("SES");
 //code to for 30min timer
 let timeInterval;
 let remainingTime=30*60;
-
+//function to count down the timer  and update it.
 function updatetime(){
     const seconds=remainingTime%60;
     const minutes=Math.floor(remainingTime/60);
@@ -30,7 +31,7 @@ function updatetime(){
         remainingTime--; // Decrease time every second
     }
 }
-
+//function that starts the timer when the treasure hunt begins
 function startTimer(){
     if(timeInterval){
         clearInterval(timeInterval);
@@ -41,7 +42,7 @@ function startTimer(){
 }
 
 
-
+//this function takes the values from the API reades the question type and applies the appropriate methods to answer said question as well as adding them to html tags.
 function getquestion() {
     fetch("https://codecyprus.org/th/api/question?session=" + sessions)
 
@@ -57,10 +58,6 @@ function getquestion() {
                 document.getElementById("skip").style.display="block";
 
             }else{document.getElementById("skip").style.display="none";}
-            if (jsonObject.requiresLocation== true) {
-                document.getElementById("location").style.display="block";
-
-            }else{document.getElementById("location").style.display="none";}
 
             if (jsonObject.questionType == "INTEGER") {
                 document.getElementById("question").innerHTML = jsonObject.questionText;
@@ -96,10 +93,11 @@ function getquestion() {
                 document.getElementById("options").innerHTML += '<input type="button" value="Answer" onclick="Answer(answer.value)"/>';
             }
             if(jsonObject.requiresLocation==true) {
-                getLocation();
+                setInterval(getLocation,5000)
             }
         });
 }
+//function used to check the geological location of a player.
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);}
@@ -113,7 +111,6 @@ function getLocation() {
         fetch("https://codecyprus.org/th/api/location?session="+ sessions +"&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
-                console.log(jsonObject);
             });
 
     }
@@ -121,6 +118,7 @@ function getLocation() {
 
 
 }
+//function that takes the answer provided by the user's input and checks if its right or wrong and respond accordingly.
 function Answer(ans) {
     fetch("https://codecyprus.org/th/api/answer?session=" + sessions + "&answer=" + ans)
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -142,6 +140,7 @@ function Answer(ans) {
 
         })
 }
+//Used to skip a question if allowed by the treasure hunt API.
 function Skip(){
     fetch("https://codecyprus.org/th/api/skip?session="+sessions)
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -162,7 +161,7 @@ function setCookie(cookieName, cookieValue, expireDays) {
     let expires = "expires=" + date.toUTCString();
     document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
 }
-
+//Function used to display the score on the app.html
 async function getscore() {
     let sessions = getCookie("SES");
     console.log(sessions);
@@ -182,7 +181,7 @@ async function getscore() {
     }
 
 }
-
+//enable this functions when before the page loads.
 window.onload = function () {
     getquestion();
     getscore();

@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/Styles.css"/>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="Get_Leaderboard()">
+<header class="header" id="headerid">
+    <div class="header-image">
+        <img src="images/pirate.png" alt="logo th" id="logo">
+        <div class="header-title">Treasure Hunt</div>
+        <div class="header-title" id="score" style="display: none;"></div>
+    </div>
+
+    <nav class="header-nav">
+        <ul class="burger-list">
+            <li><a href="index.html">Main page</a></li>
+            <li><a href="notes.html">Notes</a></li>
+            <li><a href="Unit testing.html">Unit Testing</a></li>
+        </ul>
+    </nav>
+</header>
 <table id="test-results-table">
     <tr>
         <th>Name</th>
@@ -33,11 +49,12 @@
         return "";
     }
     let sessions=getCookie("SES");
+    //obtains the values from the API regarding the leaderboard.
     function Get_Leaderboard() {
         fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessions + "&sorted&limit=20")
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => handleLeaderboard(jsonObject))
-
+        //Uses the values that were received and alters them as well as applying them into the html for display
         function handleLeaderboard(leaderboard) {
             let options = {
                 day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
@@ -55,7 +72,7 @@
                     "<td>" + entry['player'] + "</td>" +
                     "<td>" + entry['score'] + "</td>" +
                     "<td>" + formattedDate + "</td>" +
-                    "</tr>";;
+                    "</tr>";
             }
 
 
