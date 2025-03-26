@@ -101,20 +101,24 @@ function getquestion() {
         });
 }
 function getLocation() {
-    fetch("https://codecyprus.org/th/api/location?session="+ sessions +"&latitude=position.coords.latitude&longitude=position.coords.longitude")
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);}
-            else {
-                alert("Geolocation is not supported by your browser.");}
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);}
+    else {
+        alert("Geolocation is not supported by your browser.");}
 
-            function showPosition(position) {
-                alert("Latitude: " + position.coords.latitude + ",Longitude: " +
-                    position.coords.longitude);
-            }
+    function showPosition(position) {
+        alert("Latitude: " + position.coords.latitude + ",Longitude: " +
+            position.coords.longitude);
 
-        })
+        fetch("https://codecyprus.org/th/api/location?session="+ sessions +"&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+                console.log(jsonObject);
+            });
+
+    }
+
+
 
 }
 function Answer(ans) {
