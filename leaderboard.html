@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/Styles.css"/>
+</head>
+<body onload="Get_Leaderboard()">
+<table id="test-results-table">
+    <tr>
+        <th>Name</th>
+        <th>Score</th>
+        <th>Time</th>
+    </tr>
+
+</table>
+</body>
+
+<script>
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    let sessions=getCookie("SES");
+    function Get_Leaderboard() {
+        fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessions + "&sorted&limit=20")
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => handleLeaderboard(jsonObject))
+
+        function handleLeaderboard(leaderboard) {
+            let options = {
+                day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
+                second: '2-digit'
+            };
+            let html = ""; // used to include HTML code for the table rows
+            let leaderboardArray = leaderboard['leaderboard'];
+            console.log("leaderboardArray", leaderboardArray);
+            console.log("length: " + leaderboardArray.length);
+            let leaderboardElement = document.getElementById('test-results-table'); // table
+            for (const entry of leaderboardArray) {
+                let date = new Date(entry['completionTime']);
+                let formattedDate = date.toLocaleDateString("en-UK", options);
+                leaderboardElement.innerHTML += "<tr>" +
+                    "<td>" + entry['player'] + "</td>" +
+                    "<td>" + entry['score'] + "</td>" +
+                    "<td>" + formattedDate + "</td>" +
+                    "</tr>";;
+            }
+
+
+        }
+
+    }
+
+
+
+
+</script>
+<style>
+    #test-results-table{
+        margin:auto;
+        text-align: center;
+        color: #8b4513;
+        background-color:white;
+        font-weight: bold;
+        border:1px solid black;
+    }
+    th{
+        margin:auto;
+        text-align: center;
+        color: white;
+        background-color:#8b4513;
+        font-weight: bold;
+        border:1px solid black;
+    }
+</style>
+</html>

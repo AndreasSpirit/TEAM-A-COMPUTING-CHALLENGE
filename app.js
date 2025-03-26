@@ -51,7 +51,7 @@ function getquestion() {
             document.getElementById("skip").innerHTML = '<input type="button" value="Skip" onClick="Skip()"/>';
             document.getElementById("location").innerHTML = '<input type="button" value="Get Location" onClick="getLocation()"/>';
             if(jsonObject.completed==true){
-                window.location.assign("test.html");
+                window.location.assign("leaderboard.html");
             }
             if (jsonObject.canBeSkipped== true) {
                 document.getElementById("skip").style.display="block";
